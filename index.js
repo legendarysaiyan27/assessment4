@@ -7,16 +7,21 @@ app.use(cors());
 
 app.use(express.json());
 
-const { getFortune, getMisfortune, createMakefor } = require("./controller");
+app.use(express.static( './'));
+
+const { getFortune, getMisfortune, createMakefor, deleteMakefor } = require("./controller");
 
 //app.get("/api/main", mainjs)
 
 app.get("/api/fortune", getFortune);
 app.get("/api/misfortune", getMisfortune);
 app.post("/api/makefor", createMakefor)
+app.delete("/api/makefor/:index", deleteMakefor)
+
 app.get("/", (req, res) => {
     console.log(__dirname)
-    res.sendFile(__dirname + "/index.html")
+    res.sendFile( "/index.html",{root:__dirname})
 })
+
 
 app.listen(4000, () => console.log("Server running on 4000"));
