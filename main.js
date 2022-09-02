@@ -18,26 +18,28 @@ const getMisfortune =() => {
         });
 };
 
-function deletePost () {
-    axios.delete(`/api/makefor/${index}`);
-
-};
 
 const postMakefor = (e) => {
      e.preventDefault();
-    const inputValue = formInput.value;
-    axios.post("/api/makefor/", {inputValue}).then((res) => {
+    const inputValue = formInput.value
+    console.log(`form input ${inputValue}`)
+    axios.post("/api/makefor/", {inputValue})
+    .then((res) => { 
+        section.innerHTML = ""
       res.data.forEach((element, index) => {
-        let charCard = document.createElement("div");
-        charCard.innerHTML = `<h3>${element}</h3>
-        <button id='${index}'>Delete</button>
+       let charCard = document.createElement("div");
+       charCard.innerHTML = `<h3>${element}</h3><button
+         id='${index}_button'>Delete</button>
         `;
+        charCard.id = index
         section.appendChild(charCard);
         const button = document.getElementById(index);
         //console.log(button);
         button.addEventListener("click", () => {
-            axios.delete(`/api/makefor/${index}`).then((res) => {
-              console.log(res.data);
+            axios.delete(`/api/deleteMakefor/${index}`)
+            .then((res) => {
+              const element = document.getElementById(index);
+              element.remove();
            })
         })
       })

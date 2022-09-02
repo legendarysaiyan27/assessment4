@@ -16,7 +16,7 @@ const { getFortune, getMisfortune, createMakefor, deleteMakefor } = require("./c
 app.get("/api/fortune", getFortune);
 app.get("/api/misfortune", getMisfortune);
 app.post("/api/makefor", createMakefor)
-app.delete("/api/makefor/:index", deleteMakefor)
+app.delete("/api/deleteMakefor/:index", deleteMakefor)
 
 app.get("/", (req, res) => {
     console.log(__dirname)
